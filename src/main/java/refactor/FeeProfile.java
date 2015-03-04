@@ -4,7 +4,7 @@ public class FeeProfile {
 
   enum PriceCode {
     REGULAR, NEW_RELEASE, CHILDRENS
-  };
+  }
 
   private PriceCode priceCode;
 
