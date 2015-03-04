@@ -92,13 +92,6 @@ public class VideoStoreTest {
     customer.addRental(new Rental(new Movie(movieTitle), new FeeProfile(movieType), daysRented));
   }
 
-  // @Test
-  // public void ctMoviesWithUnknownPriceCodeAreFree() {
-  // addMovieRentalToCustomer(6, MOVIE_TITLE1, 100);
-  // customer.createStatement();
-  // assertThat(customer.getOwed(), is(0.0d));
-  // }
-
   @Test
   public void ctTwoDayNewReleaseRentalGetsDoubleFrequentRenterPoints() {
     addMovieRentalToCustomer(FeeProfile.PriceCode.NEW_RELEASE, MOVIE_TITLE1, 2);
