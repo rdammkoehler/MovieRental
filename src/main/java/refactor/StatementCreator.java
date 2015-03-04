@@ -1,7 +1,5 @@
 package refactor;
 
-import refactor.FeeProfile.PriceCode;
-
 public class StatementCreator {
 
   private static final String NEW_LINE = "\n";
@@ -29,21 +27,13 @@ public class StatementCreator {
     StringBuilder lineItem = new StringBuilder();
     double thisAmount = new RentalChargeCalculator().determineAmountForRental(rental);
 
-    customer.setFrequentRenterPoints(customer.getPointsEarned() + calculateFrequentRenterPoints(rental));
+    customer.setFrequentRenterPoints(customer.getPointsEarned()
+        + new FrequentRenterPointsCalculator().calculateFrequentRenterPoints(rental));
 
     customer.setTotalAmount(customer.getOwed() + thisAmount);
     lineItem.append(TAB).append(rental.getMovie().getTitle()).append(TAB).append(thisAmount).append(NEW_LINE);
 
     return lineItem.toString();
-  }
-
-  private int calculateFrequentRenterPoints(Rental rental) {
-    int pointsEarned = 1;
-
-    if (rental.getFeeProfile().getPriceCode().equals(PriceCode.NEW_RELEASE) && rental.getDaysRented() > 1) {
-      pointsEarned += 1;
-    }
-    return pointsEarned;
   }
 
   private String createFooter() {
