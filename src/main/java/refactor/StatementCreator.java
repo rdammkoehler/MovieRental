@@ -29,7 +29,7 @@ public class StatementCreator {
     StringBuilder lineItem = new StringBuilder();
     double thisAmount = new RentalChargeCalculator().determineAmountForRental(rental);
 
-    calculateFrequentRenterPoints(rental);
+    customer.setFrequentRenterPoints(customer.getPointsEarned() + calculateFrequentRenterPoints(rental));
 
     customer.setTotalAmount(customer.getOwed() + thisAmount);
     lineItem.append(TAB).append(rental.getMovie().getTitle()).append(TAB).append(thisAmount).append(NEW_LINE);
@@ -37,13 +37,14 @@ public class StatementCreator {
     return lineItem.toString();
   }
 
-  private void calculateFrequentRenterPoints(Rental rental) {
-    customer.setFrequentRenterPoints(customer.getPointsEarned() + 1);
+  private int calculateFrequentRenterPoints(Rental rental) {
+    int pointsEarned = 1;
 
-    if (rental.getFeeProfile().getPriceCode().equals(PriceCode.NEW_RELEASE) && rental.getDaysRented() > 1)
-      customer.setFrequentRenterPoints(customer.getPointsEarned() + 1);
+    if (rental.getFeeProfile().getPriceCode().equals(PriceCode.NEW_RELEASE) && rental.getDaysRented() > 1) {
+      pointsEarned += 1;
+    }
+    return pointsEarned;
   }
-
 
   private String createFooter() {
     StringBuilder footer = new StringBuilder();
