@@ -98,4 +98,18 @@ public class VideoStoreTest {
     customer.createStatement();
     assertThat(customer.getOwed(), is(0.0d));
   }
+
+  @Test
+  public void ctTwoDayNewReleaseRentalGetsDoubleFrequentRenterPoints() {
+    addMovieRentalToCustomer(Movie.NEW_RELEASE, MOVIE_TITLE1, 2);
+    customer.createStatement();
+    assertThat(customer.getPointsEarned(), is(2));
+  }
+  
+  @Test
+  public void ctOneDayNewReleaseRentalGetsNormalFrequentRenterPoints() {
+    addMovieRentalToCustomer(Movie.NEW_RELEASE, MOVIE_TITLE1, 1);
+    customer.createStatement();
+    assertThat(customer.getPointsEarned(), is(1));
+  }
 }
