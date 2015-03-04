@@ -26,7 +26,7 @@ public class VideoStoreTest {
 
   @Test
   public void calculatesAccountForSingleMovie() {
-    addMovieRentalToCustomer(Movie.NEW_RELEASE, MOVIE_TITLE1, 3);
+    addMovieRentalToCustomer(FeeProfile.NEW_RELEASE, MOVIE_TITLE1, 3);
 
     customer.createStatement();
 
@@ -36,8 +36,8 @@ public class VideoStoreTest {
 
   @Test
   public void calculatesAccountForMultipleNewRelease() {
-    addMovieRentalToCustomer(Movie.NEW_RELEASE, MOVIE_TITLE1, 3);
-    addMovieRentalToCustomer(Movie.NEW_RELEASE, MOVIE_TITLE2, 3);
+    addMovieRentalToCustomer(FeeProfile.NEW_RELEASE, MOVIE_TITLE1, 3);
+    addMovieRentalToCustomer(FeeProfile.NEW_RELEASE, MOVIE_TITLE2, 3);
 
     customer.createStatement();
 
@@ -48,7 +48,7 @@ public class VideoStoreTest {
 
   @Test
   public void calculatesAccountForChildrensMovie() {
-    addMovieRentalToCustomer(Movie.CHILDRENS, MOVIE_TITLE2, 3);
+    addMovieRentalToCustomer(FeeProfile.CHILDRENS, MOVIE_TITLE2, 3);
 
     customer.createStatement();
 
@@ -58,9 +58,9 @@ public class VideoStoreTest {
 
   @Test
   public void calculatesAccountForMultipleRegularMovies() {
-    addMovieRentalToCustomer(Movie.REGULAR, REGULAR_MOVIE1, 1);
-    addMovieRentalToCustomer(Movie.REGULAR, REGULAR_MOVIE2, 2);
-    addMovieRentalToCustomer(Movie.REGULAR, REGULAR_MOVIE3, 3);
+    addMovieRentalToCustomer(FeeProfile.REGULAR, REGULAR_MOVIE1, 1);
+    addMovieRentalToCustomer(FeeProfile.REGULAR, REGULAR_MOVIE2, 2);
+    addMovieRentalToCustomer(FeeProfile.REGULAR, REGULAR_MOVIE3, 3);
 
     customer.createStatement();
 
@@ -70,9 +70,9 @@ public class VideoStoreTest {
 
   @Test
   public void formatsStatement() {
-    addMovieRentalToCustomer(Movie.REGULAR, REGULAR_MOVIE1, 1);
-    addMovieRentalToCustomer(Movie.REGULAR, REGULAR_MOVIE2, 2);
-    addMovieRentalToCustomer(Movie.REGULAR, REGULAR_MOVIE3, 3);
+    addMovieRentalToCustomer(FeeProfile.REGULAR, REGULAR_MOVIE1, 1);
+    addMovieRentalToCustomer(FeeProfile.REGULAR, REGULAR_MOVIE2, 2);
+    addMovieRentalToCustomer(FeeProfile.REGULAR, REGULAR_MOVIE3, 3);
 
     String statement = customer.createStatement();
 
@@ -83,7 +83,7 @@ public class VideoStoreTest {
 
   @Test
   public void childrensMoviesThatAreOverdueAreChargedALateFee() {
-    addMovieRentalToCustomer(Movie.CHILDRENS, MOVIE_TITLE2, 4);
+    addMovieRentalToCustomer(FeeProfile.CHILDRENS, MOVIE_TITLE2, 4);
     customer.createStatement();
     assertThat(customer.getOwed(), is(3.0d));
   }
@@ -101,14 +101,14 @@ public class VideoStoreTest {
 
   @Test
   public void ctTwoDayNewReleaseRentalGetsDoubleFrequentRenterPoints() {
-    addMovieRentalToCustomer(Movie.NEW_RELEASE, MOVIE_TITLE1, 2);
+    addMovieRentalToCustomer(FeeProfile.NEW_RELEASE, MOVIE_TITLE1, 2);
     customer.createStatement();
     assertThat(customer.getPointsEarned(), is(2));
   }
   
   @Test
   public void ctOneDayNewReleaseRentalGetsNormalFrequentRenterPoints() {
-    addMovieRentalToCustomer(Movie.NEW_RELEASE, MOVIE_TITLE1, 1);
+    addMovieRentalToCustomer(FeeProfile.NEW_RELEASE, MOVIE_TITLE1, 1);
     customer.createStatement();
     assertThat(customer.getPointsEarned(), is(1));
   }
