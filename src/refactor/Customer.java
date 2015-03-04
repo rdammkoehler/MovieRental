@@ -7,6 +7,11 @@ public class Customer {
   private static final String NEW_LINE = "\n";
   private static final String TAB = "\t";
 
+  private String name;
+  private List<Rental> rentals = new ArrayList<Rental>();
+  private double totalAmount = 0;
+  private int frequentRenterPoints = 0;
+  
   public Customer(String name) {
     this.name = name;
   }
@@ -57,7 +62,6 @@ public class Customer {
   private double determineAmountForRental(Rental rental) {
     double thisAmount = 0;
 
-    // determines the amount for each line
     switch (rental.getMovie().getPriceCode()) {
     case Movie.REGULAR:
       thisAmount += 2;
@@ -87,17 +91,11 @@ public class Customer {
     return "Rental Record for " + getName() + NEW_LINE;
   }
 
-  private String name;
-  private List<Rental> rentals = new ArrayList<Rental>();
-  private double totalAmount = 0;
-  private int frequentRenterPoints = 0;
-
   public Double getOwed() {
     return totalAmount;
   }
 
   public int getPointsEarned() {
-
     return frequentRenterPoints;
   }
 }
