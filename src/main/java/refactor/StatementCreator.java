@@ -1,5 +1,7 @@
 package refactor;
 
+import java.math.BigDecimal;
+
 public class StatementCreator {
 
   private static final String NEW_LINE = "\n";
@@ -25,13 +27,13 @@ public class StatementCreator {
 
   private String createLineItem(Rental rental) {
     StringBuilder lineItem = new StringBuilder();
-    double thisAmount = new RentalChargeCalculator().determineAmountForRental(rental);
+    BigDecimal thisAmount = new RentalChargeCalculator().determineAmountForRental(rental);
 
     customer.setFrequentRenterPoints(customer.getPointsEarned()
         + new FrequentRenterPointsCalculator().calculateFrequentRenterPoints(rental));
 
-    customer.setTotalAmount(customer.getOwed() + thisAmount);
-    lineItem.append(TAB).append(rental.getMovie().getTitle()).append(TAB).append(thisAmount).append(NEW_LINE);
+    customer.setTotalAmount(customer.getOwed().add(thisAmount));
+    lineItem.append(TAB).append(rental.getMovie().getTitle()).append(TAB).append(thisAmount.doubleValue()).append(NEW_LINE);
 
     return lineItem.toString();
   }

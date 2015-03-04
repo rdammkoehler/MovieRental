@@ -1,5 +1,6 @@
 package refactor;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ public class Customer {
 
   private String name;
   private List<Rental> rentals = new ArrayList<Rental>();
-  private double totalAmount = 0;
+  private BigDecimal totalAmount = BigDecimal.ZERO;
   private int frequentRenterPoints = 0;
   
   public Customer(String name) {
@@ -27,7 +28,7 @@ public class Customer {
   }
 
   
-  public Double getOwed() {
+  public BigDecimal getOwed() {
     return totalAmount;
   }
 
@@ -39,7 +40,7 @@ public class Customer {
     return rentals;
   }
 
-  protected void setTotalAmount(double totalAmount) {
+  protected void setTotalAmount(BigDecimal totalAmount) {
     this.totalAmount = totalAmount;
   }
 

@@ -4,6 +4,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
+import java.math.BigDecimal;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,7 +32,7 @@ public class VideoStoreTest {
 
     customer.createStatement();
 
-    assertEquals((Double) 9.0, customer.getOwed());
+    assertThat(customer.getOwed(), is(BigDecimal.valueOf(9.0d)));
     assertEquals(2, customer.getPointsEarned());
   }
 
@@ -41,7 +43,7 @@ public class VideoStoreTest {
 
     customer.createStatement();
 
-    assertEquals((Double) 18.0, customer.getOwed());
+    assertThat(customer.getOwed(), is(BigDecimal.valueOf(18.0d)));
     assertEquals(4, customer.getPointsEarned());
 
   }
@@ -52,7 +54,7 @@ public class VideoStoreTest {
 
     customer.createStatement();
 
-    assertEquals((Double) 1.5, customer.getOwed());
+    assertThat(customer.getOwed(), is(BigDecimal.valueOf(1.5d)));
     assertEquals(1, customer.getPointsEarned());
   }
 
@@ -64,7 +66,7 @@ public class VideoStoreTest {
 
     customer.createStatement();
 
-    assertEquals((Double) 7.5, customer.getOwed());
+    assertThat(customer.getOwed(), is(BigDecimal.valueOf(7.5d)));
     assertEquals(3, customer.getPointsEarned());
   }
 
@@ -85,7 +87,7 @@ public class VideoStoreTest {
   public void childrensMoviesThatAreOverdueAreChargedALateFee() {
     addMovieRentalToCustomer(FeeProfile.PriceCode.CHILDRENS, MOVIE_TITLE2, 4);
     customer.createStatement();
-    assertThat(customer.getOwed(), is(3.0d));
+    assertThat(customer.getOwed(), is(BigDecimal.valueOf(3.0d)));
   }
 
   private void addMovieRentalToCustomer(FeeProfile.PriceCode movieType, String movieTitle, int daysRented) {
