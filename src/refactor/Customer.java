@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Customer {
 
-  String name;
-  List<Rental> rentals = new ArrayList<Rental>();
-  double totalAmount = 0;
-  int frequentRenterPoints = 0;
+  private String name;
+  private List<Rental> rentals = new ArrayList<Rental>();
+  private double totalAmount = 0;
+  private int frequentRenterPoints = 0;
   
   public Customer(String name) {
     this.name = name;
@@ -33,5 +33,21 @@ public class Customer {
 
   public int getPointsEarned() {
     return frequentRenterPoints;
+  }
+
+  protected List<Rental> getRentals() {
+    return rentals;
+  }
+
+  protected void setName(String name) {
+    this.name = name;
+  }
+
+  protected void setTotalAmount(double totalAmount) {
+    this.totalAmount = totalAmount;
+  }
+
+  protected void setFrequentRenterPoints(int frequentRenterPoints) {
+    this.frequentRenterPoints = frequentRenterPoints;
   }
 }
