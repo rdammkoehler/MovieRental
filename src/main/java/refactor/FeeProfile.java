@@ -2,16 +2,15 @@ package refactor;
 
 public class FeeProfile {
 
-  private int priceCode;
-  public static final int NEW_RELEASE = 1;
-  public static final int REGULAR = 0;
-  public static final int CHILDRENS = 2;
+  enum PriceCode {  REGULAR, NEW_RELEASE, CHILDRENS };
   
-  public FeeProfile(int movieType) {
+  private PriceCode priceCode;
+  
+  public FeeProfile(PriceCode movieType) {
     priceCode = movieType;
   }
 
-  protected int getPriceCode() {
+  protected PriceCode getPriceCode() {
     return priceCode;
   }
 

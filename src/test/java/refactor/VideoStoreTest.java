@@ -26,7 +26,7 @@ public class VideoStoreTest {
 
   @Test
   public void calculatesAccountForSingleMovie() {
-    addMovieRentalToCustomer(FeeProfile.NEW_RELEASE, MOVIE_TITLE1, 3);
+    addMovieRentalToCustomer(FeeProfile.PriceCode.NEW_RELEASE, MOVIE_TITLE1, 3);
 
     customer.createStatement();
 
@@ -36,8 +36,8 @@ public class VideoStoreTest {
 
   @Test
   public void calculatesAccountForMultipleNewRelease() {
-    addMovieRentalToCustomer(FeeProfile.NEW_RELEASE, MOVIE_TITLE1, 3);
-    addMovieRentalToCustomer(FeeProfile.NEW_RELEASE, MOVIE_TITLE2, 3);
+    addMovieRentalToCustomer(FeeProfile.PriceCode.NEW_RELEASE, MOVIE_TITLE1, 3);
+    addMovieRentalToCustomer(FeeProfile.PriceCode.NEW_RELEASE, MOVIE_TITLE2, 3);
 
     customer.createStatement();
 
@@ -48,7 +48,7 @@ public class VideoStoreTest {
 
   @Test
   public void calculatesAccountForChildrensMovie() {
-    addMovieRentalToCustomer(FeeProfile.CHILDRENS, MOVIE_TITLE2, 3);
+    addMovieRentalToCustomer(FeeProfile.PriceCode.CHILDRENS, MOVIE_TITLE2, 3);
 
     customer.createStatement();
 
@@ -58,9 +58,9 @@ public class VideoStoreTest {
 
   @Test
   public void calculatesAccountForMultipleRegularMovies() {
-    addMovieRentalToCustomer(FeeProfile.REGULAR, REGULAR_MOVIE1, 1);
-    addMovieRentalToCustomer(FeeProfile.REGULAR, REGULAR_MOVIE2, 2);
-    addMovieRentalToCustomer(FeeProfile.REGULAR, REGULAR_MOVIE3, 3);
+    addMovieRentalToCustomer(FeeProfile.PriceCode.REGULAR, REGULAR_MOVIE1, 1);
+    addMovieRentalToCustomer(FeeProfile.PriceCode.REGULAR, REGULAR_MOVIE2, 2);
+    addMovieRentalToCustomer(FeeProfile.PriceCode.REGULAR, REGULAR_MOVIE3, 3);
 
     customer.createStatement();
 
@@ -70,9 +70,9 @@ public class VideoStoreTest {
 
   @Test
   public void formatsStatement() {
-    addMovieRentalToCustomer(FeeProfile.REGULAR, REGULAR_MOVIE1, 1);
-    addMovieRentalToCustomer(FeeProfile.REGULAR, REGULAR_MOVIE2, 2);
-    addMovieRentalToCustomer(FeeProfile.REGULAR, REGULAR_MOVIE3, 3);
+    addMovieRentalToCustomer(FeeProfile.PriceCode.REGULAR, REGULAR_MOVIE1, 1);
+    addMovieRentalToCustomer(FeeProfile.PriceCode.REGULAR, REGULAR_MOVIE2, 2);
+    addMovieRentalToCustomer(FeeProfile.PriceCode.REGULAR, REGULAR_MOVIE3, 3);
 
     String statement = customer.createStatement();
 
@@ -83,32 +83,32 @@ public class VideoStoreTest {
 
   @Test
   public void childrensMoviesThatAreOverdueAreChargedALateFee() {
-    addMovieRentalToCustomer(FeeProfile.CHILDRENS, MOVIE_TITLE2, 4);
+    addMovieRentalToCustomer(FeeProfile.PriceCode.CHILDRENS, MOVIE_TITLE2, 4);
     customer.createStatement();
     assertThat(customer.getOwed(), is(3.0d));
   }
 
-  private void addMovieRentalToCustomer(int movieType, String movieTitle, int daysRented) {
-    customer.addRental(new Rental(new Movie(movieTitle),new FeeProfile(movieType), daysRented));
+  private void addMovieRentalToCustomer(FeeProfile.PriceCode movieType, String movieTitle, int daysRented) {
+    customer.addRental(new Rental(new Movie(movieTitle), new FeeProfile(movieType), daysRented));
   }
 
-  @Test
-  public void ctMoviesWithUnknownPriceCodeAreFree() {
-    addMovieRentalToCustomer(6, MOVIE_TITLE1, 100);
-    customer.createStatement();
-    assertThat(customer.getOwed(), is(0.0d));
-  }
+  // @Test
+  // public void ctMoviesWithUnknownPriceCodeAreFree() {
+  // addMovieRentalToCustomer(6, MOVIE_TITLE1, 100);
+  // customer.createStatement();
+  // assertThat(customer.getOwed(), is(0.0d));
+  // }
 
   @Test
   public void ctTwoDayNewReleaseRentalGetsDoubleFrequentRenterPoints() {
-    addMovieRentalToCustomer(FeeProfile.NEW_RELEASE, MOVIE_TITLE1, 2);
+    addMovieRentalToCustomer(FeeProfile.PriceCode.NEW_RELEASE, MOVIE_TITLE1, 2);
     customer.createStatement();
     assertThat(customer.getPointsEarned(), is(2));
   }
-  
+
   @Test
   public void ctOneDayNewReleaseRentalGetsNormalFrequentRenterPoints() {
-    addMovieRentalToCustomer(FeeProfile.NEW_RELEASE, MOVIE_TITLE1, 1);
+    addMovieRentalToCustomer(FeeProfile.PriceCode.NEW_RELEASE, MOVIE_TITLE1, 1);
     customer.createStatement();
     assertThat(customer.getPointsEarned(), is(1));
   }

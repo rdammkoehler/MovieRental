@@ -1,5 +1,7 @@
 package refactor;
 
+import refactor.FeeProfile.PriceCode;
+
 public class StatementCreator {
 
   private static final String NEW_LINE = "\n";
@@ -38,7 +40,7 @@ public class StatementCreator {
   private void calculateFrequentRenterPoints(Rental rental) {
     customer.setFrequentRenterPoints(customer.getPointsEarned() + 1);
 
-    if (rental.getFeeProfile().getPriceCode() == FeeProfile.NEW_RELEASE && rental.getDaysRented() > 1)
+    if (rental.getFeeProfile().getPriceCode().equals(PriceCode.NEW_RELEASE) && rental.getDaysRented() > 1)
       customer.setFrequentRenterPoints(customer.getPointsEarned() + 1);
   }
 
@@ -46,15 +48,15 @@ public class StatementCreator {
     double thisAmount = 0;
 
     switch (rental.getFeeProfile().getPriceCode()) {
-    case FeeProfile.REGULAR:
+    case REGULAR:
       thisAmount += 2;
       if (rental.getDaysRented() > 2)
         thisAmount += (rental.getDaysRented() - 2) * 1.5;
       break;
-    case FeeProfile.NEW_RELEASE:
+    case NEW_RELEASE:
       thisAmount += rental.getDaysRented() * 3;
       break;
-    case FeeProfile.CHILDRENS:
+    case CHILDRENS:
       thisAmount += 1.5;
       if (rental.getDaysRented() > 3)
         thisAmount += (rental.getDaysRented() - 3) * 1.5;
