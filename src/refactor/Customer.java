@@ -39,10 +39,6 @@ public class Customer {
     return rentals;
   }
 
-  protected void setName(String name) {
-    this.name = name;
-  }
-
   protected void setTotalAmount(double totalAmount) {
     this.totalAmount = totalAmount;
   }
