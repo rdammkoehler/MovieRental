@@ -71,7 +71,7 @@ public class StatementCreator {
   }
 
   private String createHeader() {
-    return "Rental Record for " + customer.getName() + NEW_LINE;
+    return new StringBuilder("Rental Record for ").append(customer.getName()).append(NEW_LINE).toString();
   }
 
 }
