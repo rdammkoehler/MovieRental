@@ -1,6 +1,5 @@
 package refactor;
 
-import refactor.FeeProfile.PriceCode;
 
 public class FrequentRenterPointsCalculator {
   public int calculateFrequentRenterPoints(Rental rental) {
