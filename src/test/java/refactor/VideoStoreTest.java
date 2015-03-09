@@ -91,7 +91,7 @@ public class VideoStoreTest {
   }
 
   private void addMovieRentalToCustomer(PriceCode movieType, String movieTitle, int daysRented) {
-    customer.addRental(new Rental(new Movie(movieTitle), new FeeProfile(movieType), daysRented));
+    customer.addRental(new Rental(new Movie(movieTitle), movieType, daysRented));
   }
 
   @Test

@@ -4,12 +4,12 @@ public class Rental {
 
   private Movie movie;
   private int daysRented;
-  private FeeProfile feeProfile;
+  private PriceCode priceCode;
 
-  public Rental(Movie movie2, FeeProfile feeProfile, int daysRented2) {
-    this.movie = movie2;
-    this.feeProfile = feeProfile;
-    this.daysRented = daysRented2;
+  public Rental(Movie movie, PriceCode priceCode, int daysRented) {
+    this.movie = movie;
+    this.priceCode = priceCode;
+    this.daysRented = daysRented;
   }
 
   public int getDaysRented() {
@@ -20,7 +20,7 @@ public class Rental {
     return movie;
   }
 
-  protected FeeProfile getFeeProfile() {
-    return feeProfile;
+  public PriceCode getPriceCode() {
+    return priceCode;
   }
 }

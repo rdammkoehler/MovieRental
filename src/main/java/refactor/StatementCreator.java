@@ -27,7 +27,7 @@ public class StatementCreator {
 
   private String createLineItem(Rental rental) {
     StringBuilder lineItem = new StringBuilder();
-    BigDecimal thisAmount = rental.getFeeProfile().getPriceCode().calculateCharges(rental.getDaysRented());
+    BigDecimal thisAmount = rental.getPriceCode().calculateCharges(rental.getDaysRented());
 
     customer.setFrequentRenterPoints(customer.getPointsEarned()
         + new FrequentRenterPointsCalculator().calculateFrequentRenterPoints(rental));
